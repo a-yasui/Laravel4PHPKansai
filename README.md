@@ -27,3 +27,11 @@ Laravel4 のmemo project
 -- email
 -- comment
 
+
+# URL Mapping ? Maping ?
+
+/ => lambda
+/user => User@index
+/blog/ => Blog@index
+/<title>/ => Blog@story
+/edit/<title> => Blog@edit

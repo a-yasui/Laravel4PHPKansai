@@ -11,7 +11,56 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
+Route::get('/', function() {
+
+    // 最新の記事5件を取得する
+    return View::make('hello')->
+            with("blogs", Blog::select('title')->get(5));
 });
+
+Route::get('register', function()
+{
+    return View::make('user.register');
+});
+
+Route::post('register', function()
+{
+    if (Auth::check())
+        return Redirect::to("blog");
+
+    $rules = array(
+        'name' => 'required',
+        'password' => 'required|min:8',
+        'email' => 'required|email|unique:users'
+    );
+    $message = array(
+        'name.required' => "ユーザ名を入力してください",
+        "password.required" => "パスワードを入力してください",
+        "password.min" => "パスワードは8文字以上記入してください",
+        "email.required" => "E-Mailアドレスは必須",
+        "email.email" => "E-Mailアドレスは、半角英数で記入してくだし",
+        "email.unique" => "他のメールアドレスを指定してください。メールアドレスは既に登録されています。"
+    );
+ 
+    $validator = Validator::make(Input::all(), $rules, $message);
+ 
+    if ($validator->fails()) {
+        return Redirect::to('register')->withErrors($validator);
+    }
+
+    // 作成
+    $user = new User();
+    $user->name = Input::get("name");
+    $user->password = Hash::make(Input::get("password"));
+    $user->email = Input::get("email");
+    $user->save();
+    // var_dump($validator);
+
+    return Redirect::to("/");
+});
+
+Route::get('/user', array('before' => 'auth', function(){
+
+}));
+
+

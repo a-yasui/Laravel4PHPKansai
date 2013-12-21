@@ -2,6 +2,8 @@
 
 Laravel4 のmemo project
 
+About write this: http://qiita.com/a_yasui/items/0b32b7e9a874d8228aaa
+
 # Install
 
 > curl -sS https://getcomposer.org/installer | php

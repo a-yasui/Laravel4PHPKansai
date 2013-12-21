@@ -39,6 +39,10 @@
 		<h1>You have arrived.</h1>
 	</div>
 
+	<div>
+	<a href="/register">登録！！</a>
+	</div>
+
 	<?php foreach ($blogs as $blog): ?>
 		<?php echo $blog->title; ?><br />
 	<?php endforeach ?>

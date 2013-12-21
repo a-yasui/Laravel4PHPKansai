@@ -59,8 +59,11 @@ Route::post('register', function()
     return Redirect::to("/");
 });
 
-Route::get('/user', array('before' => 'auth', function(){
+Route::group(array('before'=>'auth'), function() {
+    Route::any("blog", "HomeController@index");
+    Route::get("user", function(){});
+});
 
-}));
+
 
 

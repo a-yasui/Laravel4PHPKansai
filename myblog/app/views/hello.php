@@ -40,7 +40,13 @@
 	</div>
 
 	<div>
-	<a href="/register">登録！！</a>
+	<?php if (Auth::check()): ?>
+		<div><a href="/blog">編集画面</a></div>
+		<div><a href="/logout">ログアウト</a></div>
+	<?php else: ?>
+		<div><a href="/register">登録</a></div>
+		<div><a href="/login">ログイン</a></div>
+	<?php endif; ?>
 	</div>
 
 	<?php foreach ($blogs as $blog): ?>

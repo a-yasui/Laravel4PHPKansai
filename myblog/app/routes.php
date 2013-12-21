@@ -24,6 +24,11 @@ Route::get('login', function () {
     return View::make("login");
 });
 
+Route::get("logout", function() {
+    Auth::logout();
+    return Redirect::to("/");
+});
+
 Route::post('login', function () {
     if (Auth::attempt(array('email' => Input::get("email"), 'password' => Input::get("password")), true))
     {
@@ -68,13 +73,13 @@ Route::post('register', function()
     $user->password = Hash::make(Input::get("password"));
     $user->email = Input::get("email");
     $user->save();
-    // var_dump($validator);
+    login::login($user);
 
     return Redirect::to("/");
 });
 
 Route::group(array('before'=>'auth'), function() {
-    Route::any("blog", "HomeController@index");
+    Route::any("blog", "BlogController@index");
     Route::get("user", function(){});
 });
 

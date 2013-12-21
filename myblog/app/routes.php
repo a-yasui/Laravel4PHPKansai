@@ -18,6 +18,20 @@ Route::get('/', function() {
             with("blogs", Blog::select('title')->get(5));
 });
 
+Route::get('login', function () {
+    if (Auth::check())
+        return Redirect::to("blog");
+    return View::make("login");
+});
+
+Route::post('login', function () {
+    if (Auth::attempt(array('email' => Input::get("email"), 'password' => Input::get("password")), true))
+    {
+        return Redirect::to("blog");
+    }
+    return Redirect::to("login");
+});
+
 Route::get('register', function()
 {
     return View::make('user.register');

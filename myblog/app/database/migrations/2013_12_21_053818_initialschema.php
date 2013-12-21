@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 
-class initialSchema extends Migration {
+class Initialschema extends Migration {
 
     /**
      * Run the migrations.
@@ -42,6 +42,12 @@ class initialSchema extends Migration {
      */
     public function down()
     {
+        Schema::table("posts", function($table){
+            $table->dropForeign("blog_id");
+        });
+        Schema::table("blogs", function($table){
+            $table->dropForeign("user_id");
+        });
         Schema::drop("posts");
         Schema::drop("blogs");
         Schema::drop('users');

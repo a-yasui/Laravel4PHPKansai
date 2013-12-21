@@ -14,6 +14,14 @@ class Blog extends Eloquent {
 
 
 	/**
+	 * 公開プロパティ？
+	 *
+	 * @var array
+	 */
+	protected $fillable = array('title', 'description');
+
+
+	/**
 	 *
 	 * @var User
 	 */
@@ -21,7 +29,6 @@ class Blog extends Eloquent {
     public function user() {
         return $this->belongsTo('User');
     }
-
 
 	/**
 	 *

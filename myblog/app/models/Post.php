@@ -12,6 +12,13 @@ class Post extends Eloquent {
 	 */
 	protected $table = 'posts';
 
+	/**
+	 * 公開プロパティ？
+	 *
+	 * @var array
+	 */
+	protected $fillable = array('title', 'story');
+
 
 	/**
 	 *
